@@ -6,7 +6,7 @@ function(minimal_script file)
     pandoc_document(
             TARGET ${file}.pdf
             SOURCES ${file}.md
-            PARAMS -V lang=de-CH
+            PARAMS -V lang=en-US
     )
 endfunction()
 
@@ -17,7 +17,7 @@ function(minimal_slides file)
     pandoc_document(
             TARGET ${file}.pdf
             SOURCES ${file}.md
-            PARAMS -t beamer -V lang=de-CH -V aspectratio=1610
+            PARAMS -t beamer -V lang=en-US -V aspectratio=1610
     )
 endfunction()
 
