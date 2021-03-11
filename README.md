@@ -1,6 +1,8 @@
 docmake
 =======
 
+[![Software Build](https://github.com/langchr86/docmake/workflows/cmake_run/badge.svg)](https://github.com/langchr86/docmake/actions?query=workflow%3Acmake_run)
+
 CMake modules to integrate pandoc and other tools for code like document compilation.
 
 

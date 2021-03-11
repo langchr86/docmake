@@ -1,0 +1,26 @@
+name: cmake_run
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install prerequisites
+        run: |
+          sudo apt-get install -y --no-install-recommends \
+            cmake \
+            pandoc \
+            texlive texlive-pictures texlive-latex-extra \
+            lmodern
+
+      - name: configure and build
+        run: |
+          mkdir build
+          cmake -S . -B build
+          cmake --build build
