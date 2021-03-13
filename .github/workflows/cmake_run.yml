@@ -3,15 +3,14 @@ name: cmake_run
 on: [push, pull_request]
 
 jobs:
-  build:
+  minimal-sample:
     strategy:
       fail-fast: false
-
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
-      - name: install prerequisites
+      - name: prerequisites
         run: |
           sudo apt-get install -y --no-install-recommends \
             cmake \
@@ -23,4 +22,4 @@ jobs:
         run: |
           mkdir build
           cmake -S . -B build
-          cmake --build build
+          cmake --build build --target minimal_slides.pdf minimal_script.pdf
