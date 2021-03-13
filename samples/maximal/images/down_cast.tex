@@ -1,0 +1,23 @@
+\documentclass{standalone}
+
+\usepackage[default]{sourcecodepro}
+
+\usepackage{tikz}
+\usepackage{tikz-uml}
+
+\begin{document}
+\begin{tikzpicture}
+
+\tikzumlset{fill class=orange!30}
+
+\umlsimpleclass[x=0, y=3]{A}
+\umlsimpleclass[x=0, y=1.5]{B}
+\umlsimpleclass[x=0, y=0]{C}
+
+\umlsimpleclass[x=2.5, y=3]{D}
+
+\umlinherit{C}{B}
+\umlinherit{B}{A}
+
+\end{tikzpicture}
+\end{document}

@@ -21,5 +21,81 @@ jobs:
       - name: configure and build
         run: |
           mkdir build
-          cmake -S . -B build
+          cmake -S . -B build -DDOCMAKE_ENABLE_MAXIMAL_EXAMPLE=OFF
           cmake --build build --target minimal_slides.pdf minimal_script.pdf
+
+  maximal-sample:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-20.04
+    env:
+      DISPLAY: ":99"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "install prerequisites"
+        run: |
+          sudo apt-get install -y --no-install-recommends \
+            cmake \
+            pandoc \
+            texlive \
+            texlive-pictures \
+            texlive-latex-extra \
+            texlive-fonts-extra \
+            texlive-lang-english \
+            texlive-science \
+            texlive-xetex \
+            texlive-extra-utils \
+            latexmk \
+            gpp \
+            lmodern
+
+      - name: "install and start xvfb as a workaround for drawio-desktop does not work without an X server"
+        run: |
+          sudo apt install desktop-file-utils xvfb
+          Xvfb :99 &
+
+      - name: "install drawio-desktop"
+        run: |
+          sudo apt install desktop-file-utils
+          cd /tmp
+          mkdir drawio
+          cd drawio
+          wget --no-verbose https://github.com/jgraph/drawio-desktop/releases/download/v14.1.8/draw.io-amd64-14.1.8.deb
+          sudo apt-get install ./draw.io-*.deb
+          cd /tmp
+          rm -rf /tmp/drawio
+          drawio --version
+
+      - name: "install tikz-uml"
+        run: |
+          export LATEX_HOME=$(kpsewhich -var-value=TEXMFHOME)/tex/latex/
+          mkdir -p ${LATEX_HOME}
+          cp samples/maximal/latex/tikz-uml.sty ${LATEX_HOME}
+
+      - name: "install metropolis theme"
+        run: |
+          cd /tmp
+          mkdir metropolis
+          cd metropolis
+          git clone https://github.com/matze/mtheme.git
+          cd mtheme
+          git checkout v1.2
+          make sty
+          make install
+          cd /tmp
+          rm -rf /tmp/metropolis
+
+      - name: "install markdownlint"
+        # https://github.com/igorshubovych/markdownlint-cli
+        run: |
+          sudo apt install -y --no-install-recommends \
+            npm
+          sudo npm install -g markdownlint-cli
+          markdownlint --version
+
+      - name: configure and build
+        run: |
+          mkdir build
+          cmake -S . -B build -DDOCMAKE_ENABLE_MAXIMAL_EXAMPLE=ON
+          cmake --build build --target maximal_slides.pdf maximal_script.pdf maximal_script_solution.pdf
