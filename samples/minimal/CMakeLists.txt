@@ -22,5 +22,5 @@ function(minimal_slides file)
 endfunction()
 
 
-minimal_script(script)
-minimal_slides(slides)
+minimal_script(minimal_script)
+minimal_slides(minimal_slides)
