@@ -4,6 +4,7 @@ include(CMakeParseArguments)
 include(docmake/helpers)
 
 prepare_tool(pdflatex LATEX_EXECUTABLE)
+prepare_tool(texfot TEXFOT_EXECUTABLE)
 
 
 function(latex_files)
@@ -33,9 +34,8 @@ function(latex_files)
         add_custom_command(
                 OUTPUT ${absolute_dest_file}
                 COMMAND ${CMAKE_COMMAND} -E chdir ${specific_dest_folder}
-                ${LATEX_EXECUTABLE} ${absolute_source}
+                ${TEXFOT_EXECUTABLE} --quiet ${LATEX_EXECUTABLE} ${absolute_source}
                 ${LATEX_FILES_PARAMS}
-                > /dev/null
                 DEPENDS ${absolute_source}
                 COMMENT "Building latex file: ${relative_dest_file}"
                 VERBATIM
