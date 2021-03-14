@@ -1,4 +1,4 @@
 include(maximal_example.cmake)
 
-maximal_script(maximal_script)
-maximal_slides(maximal_slides)
+maximal_script(example_maximal_script)
+maximal_slides(example_maximal_slides)

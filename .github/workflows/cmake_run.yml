@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir build
           cmake -S . -B build -DDOCMAKE_ENABLE_MINIMAL_EXAMPLE=ON
-          cmake --build build --target minimal_slides.pdf minimal_script.pdf
+          cmake --build build
 
   maximal-example:
     strategy:
@@ -98,4 +98,4 @@ jobs:
         run: |
           mkdir build
           cmake -S . -B build -DDOCMAKE_ENABLE_MAXIMAL_EXAMPLE=ON
-          cmake --build build --target maximal_slides.pdf maximal_script.pdf maximal_script_solution.pdf
+          cmake --build build
