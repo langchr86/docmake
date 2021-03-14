@@ -1,7 +1,9 @@
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules")
 
-if(DOCMAKE_ENABLE_MAXIMAL_EXAMPLE)
-  add_subdirectory(maximal)
-endif()
+if (DOCMAKE_ENABLE_MINIMAL_EXAMPLE)
+    add_subdirectory(minimal)
+endif ()
 
-add_subdirectory(minimal)
+if (DOCMAKE_ENABLE_MAXIMAL_EXAMPLE)
+    add_subdirectory(maximal)
+endif ()

@@ -21,7 +21,7 @@ jobs:
       - name: configure and build
         run: |
           mkdir build
-          cmake -S . -B build -DDOCMAKE_ENABLE_MAXIMAL_EXAMPLE=OFF
+          cmake -S . -B build -DDOCMAKE_ENABLE_MINIMAL_EXAMPLE=ON
           cmake --build build --target minimal_slides.pdf minimal_script.pdf
 
   maximal-sample:
