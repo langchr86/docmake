@@ -7,4 +7,4 @@ option(DOCMAKE_ENABLE_MAXIMAL_EXAMPLE "Enable the maximal example project" OFF)
 option(DOCMAKE_SELF_CONTAINED_EXAMPLES "Use the cmake modules directly without the need to install them" ON)
 
 add_subdirectory(installation)
-add_subdirectory(samples)
+add_subdirectory(examples)

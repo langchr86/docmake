@@ -3,7 +3,7 @@ name: cmake_run
 on: [push, pull_request]
 
 jobs:
-  minimal-sample:
+  minimal-example:
     strategy:
       fail-fast: false
     runs-on: ubuntu-20.04
@@ -24,7 +24,7 @@ jobs:
           cmake -S . -B build -DDOCMAKE_ENABLE_MINIMAL_EXAMPLE=ON
           cmake --build build --target minimal_slides.pdf minimal_script.pdf
 
-  maximal-sample:
+  maximal-example:
     strategy:
       fail-fast: false
     runs-on: ubuntu-20.04
@@ -71,7 +71,7 @@ jobs:
         run: |
           export LATEX_HOME=$(kpsewhich -var-value=TEXMFHOME)/tex/latex/
           mkdir -p ${LATEX_HOME}
-          cp samples/maximal/latex/tikz-uml.sty ${LATEX_HOME}
+          cp examples/maximal/latex/tikz-uml.sty ${LATEX_HOME}
 
       - name: "install metropolis theme"
         run: |
