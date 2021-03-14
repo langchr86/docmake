@@ -7,6 +7,18 @@ prepare_tool(gpp GPP_EXECUTABLE)
 set(GPP_CMAKE_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 
+#! gpp_preprocessor : Preprocessing of arbitrary files with gpp similar to C/C++.
+#
+# Each input file is preprocessed by gpp. The HTML syntax style is used (see gpp.sh).
+# Therefore defined and macros are written with <#...> style.
+#
+# This calls add_custom_command for each input file. This can process multiple input files at ones.
+#
+# \param:OUTPUT_LIST Output parameter that will be set to the absolute file paths of all generated files.
+# \group:SOURCES Relative or absolute path list of all to preprocess input files.
+# \group:DEFINES External defines that should be used during preprocessing.
+# \group:INCLUDE_PATHS Relative or absolute path where include files during preprocessing are searched.
+#
 function(gpp_preprocessor)
     set(oneValueArgs OUTPUT_LIST)
     set(multiValueArgs SOURCES DEFINES INCLUDE_PATHS)

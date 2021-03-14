@@ -5,6 +5,16 @@ include(docmake/helpers)
 prepare_tool(markdownlint MDL_EXECUTABLE)
 
 
+#! setup_markdownlint : Linting markdown files.
+#
+# Each input file is linted by markdownlint CLI and created a timestamp file. This can be used for dependency creation.
+#
+# This calls add_custom_command for each input file. This can process multiple input files at ones.
+#
+# \param:OUTPUT_LIST Output parameter that will be set to the absolute file paths of all generated timestamp files.
+# \param:STYLE_FILE Path to the YAML settings file of markdownlint.
+# \group:SOURCES Relative or absolute path list of all to lint input files.
+#
 function(setup_markdownlint)
     set(oneValueArgs OUTPUT_LIST STYLE_FILE)
     set(multiValueArgs SOURCES)

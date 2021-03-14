@@ -5,6 +5,14 @@ include(docmake/helpers)
 prepare_tool(drawio DRAWIO_EXECUTABLE)
 
 
+#! drawio_images : Conversion step that uses the drawio CLI tool to convert any XML style drawio image to a cropped PDF.
+#
+# This calls add_custom_command for each input file. This can process multiple input files at ones.
+#
+# \param:OUT_PATH Output parameter that will be set to the absolute path where the converted PDF files are placed.
+# \param:OUT_FILES Output parameter that will be set to the absolute paths of all the converted PDF files.
+# \group:SOURCES Relative or absolute path list of all to convert input files.
+#
 function(drawio_images)
     set(oneValueArgs OUT_PATH OUT_FILES)
     set(multiValueArgs SOURCES)

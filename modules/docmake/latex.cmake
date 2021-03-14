@@ -6,6 +6,17 @@ prepare_tool(pdflatex LATEX_EXECUTABLE)
 prepare_tool(texfot TEXFOT_EXECUTABLE)
 
 
+#! latex_files : Compilation of latex files into PDF.
+#
+# Each input file is processed by pdflatex. To reduce clutter in the output the call is made by texfot.
+#
+# This calls add_custom_command for each input file. This can process multiple input files at ones.
+#
+# \param:OUT_PATH Output parameter that will be set to the absolute path where all generated files are placed.
+# \param:OUT_FILES Output parameter that will be set to the absolute file paths of all generated files.
+# \group:SOURCES Relative or absolute path list of all to convert latex files.
+# \group:PARAMS Arbitrary parameters to provide to pdflatex.
+#
 function(latex_files)
     set(oneValueArgs OUT_PATH OUT_FILES)
     set(multiValueArgs SOURCES PARAMS)
