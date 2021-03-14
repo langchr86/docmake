@@ -65,7 +65,6 @@ jobs:
           sudo apt-get install ./draw.io-*.deb
           cd /tmp
           rm -rf /tmp/drawio
-          drawio --version
 
       - name: "install tikz-uml"
         run: |
@@ -92,7 +91,6 @@ jobs:
           sudo apt install -y --no-install-recommends \
             npm
           sudo npm install -g markdownlint-cli
-          markdownlint --version
 
       - name: configure and build
         run: |
