@@ -45,7 +45,7 @@ function(add_style_check_rule SOURCE DEST CONFIG_FILE)
             ${MDL_EXECUTABLE}
             --config=${CONFIG_FILE}
             ${SOURCE}
-            && touch ${DEST}
+            && ${CMAKE_COMMAND} -E touch ${DEST}
             DEPENDS ${SOURCE}
             DEPENDS ${CONFIG_FILE}
             COMMENT "Linting with markdownlint: ${SOURCE}")
