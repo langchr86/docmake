@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-include(CMakeParseArguments)
 include(docmake/helpers)
 
 prepare_tool(markdownlint MDL_EXECUTABLE)
