@@ -1,0 +1,30 @@
+name: installation
+
+on: [push, pull_request]
+
+jobs:
+  minimal-example:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: prerequisites
+        run: |
+          sudo apt-get install -y --no-install-recommends \
+            cmake \
+            pandoc \
+            texlive \
+            lmodern
+
+      - name: install modules
+        run: |
+          mkdir install_build
+          cmake -S . -B install_build
+          sudo cmake --build install_build --target install
+
+      - name: configure without self contained examples
+        run: |
+          mkdir build
+          cmake -S . -B build -DDOCMAKE_SELF_CONTAINED_EXAMPLES=OFF -DDOCMAKE_ENABLE_MINIMAL_EXAMPLE=ON
