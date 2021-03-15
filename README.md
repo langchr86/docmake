@@ -57,6 +57,8 @@ by setting `CMAKE_MODULE_PATH` accordingly instead of use `find_package(docmake)
 
 All the tools that are executed by these cmake modules need to be installed separately.
 See the [examples.yml](.github/workflows/examples.yml) github workflow for an example of the used tools.
+Or use the companion [ansible-role-docmake](https://github.com/langchr86/ansible-role-docmake)
+to install the needed tools with ansible.
 
 See the [examples](./examples/) for concrete cmake code etc.
 The output (may be old) of these examples can also be downloaded here:
@@ -123,14 +125,6 @@ and trigger only the compilation steps that are needed to update the output file
 To visualize such dependencies the following diagram shows the maximum examples dependencies.
 
 ![Maximal example dependencies](doc/dependency_management_maximal.png)
-
-
-ToDo
-----
-
-* separate ansible role to install pandoc, latex etx.
-  * every part should be optional
-  * main part is the installation of the modules
 
 
 License

@@ -33,64 +33,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: "install prerequisites"
-        run: |
-          sudo apt-get install -y --no-install-recommends \
-            cmake \
-            pandoc \
-            texlive \
-            texlive-pictures \
-            texlive-latex-extra \
-            texlive-fonts-extra \
-            texlive-lang-english \
-            texlive-science \
-            texlive-xetex \
-            texlive-extra-utils \
-            latexmk \
-            gpp \
-            lmodern
-
       - name: "install and start xvfb as a workaround for drawio-desktop does not work without an X server"
         run: |
-          sudo apt install desktop-file-utils xvfb
+          sudo apt install -y --no-install-recommends desktop-file-utils xvfb
           Xvfb :99 &
 
-      - name: "install drawio-desktop"
+      - name: "install ansible"
         run: |
-          sudo apt install desktop-file-utils
-          cd /tmp
-          mkdir drawio
-          cd drawio
-          wget --no-verbose https://github.com/jgraph/drawio-desktop/releases/download/v14.1.8/draw.io-amd64-14.1.8.deb
-          sudo apt-get install ./draw.io-*.deb
-          cd /tmp
-          rm -rf /tmp/drawio
+          sudo apt-get install -y --no-install-recommends python3-pip
+          sudo pip3 install ansible
 
-      - name: "install tikz-uml"
+      - name: "install prerequisites by using ansible-role-docmake"
         run: |
-          export LATEX_HOME=$(kpsewhich -var-value=TEXMFHOME)/tex/latex/
-          mkdir -p ${LATEX_HOME}
-          cp examples/maximal/latex/tikz-uml.sty ${LATEX_HOME}
-
-      - name: "install metropolis theme"
-        run: |
-          cd /tmp
-          mkdir metropolis
-          cd metropolis
-          git clone https://github.com/matze/mtheme.git
-          cd mtheme
-          git checkout v1.2
-          make sty
-          make install
-          cd /tmp
-          rm -rf /tmp/metropolis
-
-      - name: "install markdownlint"
-        # https://github.com/igorshubovych/markdownlint-cli
-        run: |
-          sudo apt install -y --no-install-recommends \
-            npm
-          sudo npm install -g markdownlint-cli
+          git clone https://github.com/langchr86/ansible-role-docmake.git
+          ./ansible-role-docmake/run_local.sh
 
       - name: configure and build
         run: |
