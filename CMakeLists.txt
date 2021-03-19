@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(docmake)
+project(docmake NONE)
 
 option(DOCMAKE_ENABLE_MINIMAL_EXAMPLE "Enable the minimal example project" OFF)
 option(DOCMAKE_ENABLE_MAXIMAL_EXAMPLE "Enable the maximal example project" OFF)
