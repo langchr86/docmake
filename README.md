@@ -127,6 +127,16 @@ To visualize such dependencies the following diagram shows the maximum examples 
 ![Maximal example dependencies](doc/dependency_management_maximal.png)
 
 
+Similar projects
+----------------
+
+Projects with similar approaches or similar goals but did not met our needs.
+Most of the time the possibility to combine other compilation steps (image rendering) or preprocessing.
+
+* [cmake-pandocology](https://github.com/jeetsukumaran/cmake-pandocology)
+* [Markdown-CMake-Pandoc](https://github.com/gismo141/Markdown-CMake-Pandoc)
+
+
 License
 -------
 
