@@ -16,6 +16,9 @@ CMake is then responsible to track the file dependencies
 and triggers the generation of all parts in the correct order
 to finally integrate all parts into the complete document.
 
+In addition the use of markdown let the user focus on writing content
+and not on formatting or compilation.
+
 
 Main features
 -------------
@@ -52,8 +55,9 @@ include(docmake/markdownlint)
 ...
 ~~~
 
-By integrating the [modules](./modules) folder directly in your project you can reference to it
-by setting `CMAKE_MODULE_PATH` accordingly instead of use `find_package(docmake)`.
+An alternative to system wide installation
+is to integrate the [modules](./modules) folder directly in your project.
+You can then reference it by setting the `CMAKE_MODULE_PATH` accordingly instead of use `find_package(docmake)`.
 
 All the tools that are executed by these cmake modules need to be installed separately.
 See the [examples.yml](.github/workflows/examples.yml) github workflow for an example of the used tools.
