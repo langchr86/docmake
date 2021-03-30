@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  docmake:
+    image: ghcr.io/$OWNER/docmake:$TAG
+    build: .
+    volumes:
+    - ./:/docmake

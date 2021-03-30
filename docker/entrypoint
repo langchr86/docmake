@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+Xvfb $DISPLAY &
+
+if [ "$1" = "default" ]; then
+  BUILD_DIR=/tmp/build
+  mkdir -p $BUILD_DIR
+  cmake -S $CODE_DIR -B $BUILD_DIR -DDOCMAKE_ENABLE_MINIMAL_EXAMPLE=ON -DDOCMAKE_ENABLE_MAXIMAL_EXAMPLE=ON
+  cmake --build $BUILD_DIR
+
+  mkdir -p $CODE_DIR/build
+  shopt -s globstar
+  cp $BUILD_DIR/**/*.pdf $CODE_DIR/build || true
+  chown -R docmake:docmake $CODE_DIR/build
+else
+  exec "$@"
+fi

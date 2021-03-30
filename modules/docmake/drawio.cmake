@@ -38,7 +38,7 @@ function(drawio_images)
 
         add_custom_command(
                 OUTPUT ${absolute_dest_file}
-                COMMAND ${DRAWIO_EXECUTABLE} --export --crop --output=${absolute_dest_file} ${absolute_source}
+                COMMAND ${DRAWIO_EXECUTABLE} --export --crop --output=${absolute_dest_file} ${absolute_source} --no-sandbox
                 DEPENDS ${absolute_source}
                 COMMENT "Rendering draw.io image: ${relative_dest_file}"
                 VERBATIM
