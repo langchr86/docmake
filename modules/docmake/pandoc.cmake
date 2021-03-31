@@ -110,7 +110,7 @@ function(pandoc_document)
             ${header_arg}
             ${template_arg}
             ${PANDOC_DOCUMENT_PARAMS}
-            --verbose > ${output_path}.log
+            --log=${output_path}.log
             DEPENDS ${source_list} ${header_list} ${template_path}
             DEPENDS $<TARGET_PROPERTY:${PANDOC_DOCUMENT_TARGET},RESOURCE_FILES>
             DEPENDS ${PANDOC_DOCUMENT_DEPENDS}
