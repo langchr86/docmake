@@ -1,0 +1,84 @@
+name: build image
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    runs-on: ubuntu-20.04
+    steps:
+      - id: lowercase_owner
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository_owner }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        env:
+          OWNER: ${{ steps.lowercase_owner.outputs.lowercase }}
+          TAG: latest
+        run: |
+          docker-compose build
+
+      - name: Run
+        env:
+          OWNER: ${{ steps.lowercase_owner.outputs.lowercase }}
+          TAG: latest
+        run: |
+          docker-compose run --rm docmake
+
+      - name: Get tag
+        if: startsWith(github.ref, 'refs/tags/')
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
+      - name: Login to GitHub Container Registry
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          OWNER: ${{ steps.lowercase_owner.outputs.lowercase }}
+          TAG: ${{ steps.vars.outputs.tag }}
+        run: |
+          docker-compose build
+          docker-compose push
+
+  test-release:
+    needs: docker
+    runs-on: ubuntu-20.04
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - id: lowercase_owner
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository_owner }}
+
+      - name: Get tag
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
+      - name: Test release
+        env:
+          OWNER: ${{ steps.lowercase_owner.outputs.lowercase }}
+          TAG: ${{ steps.vars.outputs.tag }}
+        run: |
+          docker-compose pull
+          docker-compose run --rm docmake
