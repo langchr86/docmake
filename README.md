@@ -64,14 +64,7 @@ See the [examples.yml](.github/workflows/examples.yml) github workflow for an ex
 Or use the companion [ansible-role-docmake](https://github.com/langchr86/ansible-role-docmake)
 to install the needed tools with ansible.
 
-See the [examples](./examples/) for concrete cmake code etc.
-The output (may be old) of these examples can also be downloaded here:
-
-* [example_minimal_script.pdf](doc/example_minimal_script.pdf)
-* [example_minimal_slides.pdf](doc/example_minimal_script.pdf)
-* [example_maximal_script.pdf](doc/example_maximal_script.pdf)
-* [example_maximal_script_solution.pdf](doc/example_maximal_script_solution.pdf)
-* [example_maximal_slides.pdf](doc/example_maximal_slides.pdf)
+The output of these examples can also be downloaded here in the [releases](https://github.com/langch86/docmake/releases)
 
 To see the most up to date output of these examples compile it yourself:
 
@@ -82,6 +75,13 @@ cmake .. -DDOCMAKE_ENABLE_MINIMAL_EXAMPLE=ON -DDOCMAKE_ENABLE_MAXIMAL_EXAMPLE=ON
 make
 ~~~
 
+
+Run with docker
+----------
+~~~
+cp .env-example .env
+docker-compose run --rm docmake 
+~~~
 
 Usage guide
 -----------

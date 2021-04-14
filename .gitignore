@@ -69,3 +69,4 @@ fabric.properties
 # Custom
 .idea/*
 .env
+/build

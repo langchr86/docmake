@@ -36,6 +36,23 @@ jobs:
         run: |
           docker-compose run --rm docmake
 
+      - name: zip pdfs
+        run: |
+          cd build
+          zip ../documents.zip *.pdf
+
+      - name: Overwrite latest release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        if: startsWith(github.ref, 'refs/heads/main')
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            build/*.pdf
+            documents.zip
+
       - name: Get tag
         if: startsWith(github.ref, 'refs/tags/')
         id: vars
@@ -82,3 +99,19 @@ jobs:
         run: |
           docker-compose pull
           docker-compose run --rm docmake
+
+      - name: zip pdfs
+        run: |
+          cd build
+          zip ../documents.zip *.pdf
+
+      - name: Create document realease with tag
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ steps.vars.outputs.tag }}"
+          prerelease: false
+          title: "Build documents"
+          files: |
+            build/*.pdf
+            documents.zip
